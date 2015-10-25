@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivPhoto"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:minHeight="50dp"
+        android:layout_marginTop="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvLikes"
+        android:layout_below="@+id/ivPhoto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textColor="#3E6C8F"
+        android:textStyle="bold"
+        android:padding="5dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivProfile"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:minHeight="15dp"
+        android:src="@mipmap/ic_launcher"
+        android:padding="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvUsername"
+        android:layout_alignBottom="@+id/ivProfile"
+        android:layout_toRightOf="@+id/ivProfile"
+        android:layout_toEndOf="@+id/ivProfile"
+        android:textColor="#3E6C8F"
+        android:textStyle="bold"
+        android:padding="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvTime"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/tvUsername"
+        android:layout_alignTop="@+id/tvUsername"
+        android:textColor="#A6ABAE"
+        android:padding="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Caption"
+        android:id="@+id/tvCaption"
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_below="@+id/tvLikes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CommentCount"
+        android:id="@+id/tvCommentCount"
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_below="@+id/tvCaption"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#A6ABAE"
+        android:padding="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="comment1"
+        android:id="@+id/tvComment1"
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_below="@+id/tvCommentCount"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comment2"
+        android:id="@+id/tvComment2"
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_below="@+id/tvComment1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="5dp" />
+
+</RelativeLayout>
