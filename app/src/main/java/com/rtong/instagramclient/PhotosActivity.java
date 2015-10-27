@@ -1,11 +1,14 @@
 package com.rtong.instagramclient;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,10 +36,9 @@ public class PhotosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photos);
         // send out api request to popular photos
         photos = new ArrayList<>();
-        aPhotos = new InstagramPhotosAdapter(this, photos);
+        aPhotos = new InstagramPhotosAdapter(this, photos, getSupportFragmentManager());
         ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
         lvPhotos.setAdapter(aPhotos);
-
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
@@ -54,7 +56,6 @@ public class PhotosActivity extends AppCompatActivity {
                 android.R.color.holo_red_light);
 
         fetchPopularPhotos();
-
 
     }
 
@@ -91,18 +92,24 @@ public class PhotosActivity extends AppCompatActivity {
                         photo.createdTime = photoJSON.getString("created_time");
 
                         photo.commentCount = photoJSON.getJSONObject("comments").getInt("count");
-                        JSONArray comments = photoJSON.getJSONObject("comments").getJSONArray("data");
+                        JSONArray commentsJSON = photoJSON.getJSONObject("comments").getJSONArray("data");
                         String usrName;
                         String comment;
-                        if(comments.length() > 0){
-                            usrName = comments.getJSONObject(0).getJSONObject("from").getString("username");
-                            comment = comments.getJSONObject(0).getString("text");
+                        if(commentsJSON.length() > 0){
+                            usrName = commentsJSON.getJSONObject(0).getJSONObject("from").getString("username");
+                            comment = commentsJSON.getJSONObject(0).getString("text");
                             photo.comment1 = "<b><font color='#3E6C8F'>" + usrName + "</font></b>" + " "  + comment;
                         }
-                        if(comments.length() > 1){
-                            usrName = comments.getJSONObject(1).getJSONObject("from").getString("username");
-                            comment = comments.getJSONObject(1).getString("text");
+                        if(commentsJSON.length() > 1){
+                            usrName = commentsJSON.getJSONObject(1).getJSONObject("from").getString("username");
+                            comment = commentsJSON.getJSONObject(1).getString("text");
                             photo.comment2 = "<b><font color='#3E6C8F'>" + usrName + "</font></b>" + " "  + comment;
+                        }
+                        photo.comments = new ArrayList<String>();
+                        for(int j = 0; j < commentsJSON.length(); j++){
+                            usrName = commentsJSON.getJSONObject(j).getJSONObject("from").getString("username");
+                            comment = commentsJSON.getJSONObject(j).getString("text");
+                            photo.comments.add("<b><font color='#3E6C8F'>" + usrName + "</font></b>" + " "  + comment);
                         }
 
                         photos.add(photo);

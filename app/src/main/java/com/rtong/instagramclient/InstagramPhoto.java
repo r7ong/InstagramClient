@@ -1,8 +1,7 @@
 package com.rtong.instagramclient;
 
-/**
- * Created by rtong on 10/25/15.
- */
+import java.util.ArrayList;
+
 public class InstagramPhoto {
     public String username;
     public String caption;
@@ -14,6 +13,7 @@ public class InstagramPhoto {
     public int commentCount;
     public String comment1;
     public String comment2;
+    public ArrayList<String> comments;
 
 
     public InstagramPhoto() {

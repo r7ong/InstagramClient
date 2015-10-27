@@ -2,33 +2,41 @@ package com.rtong.instagramclient;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
-    public InstagramPhotosAdapter(Context context, List<InstagramPhoto> objects) {
+    public FragmentManager fm;
+    public InstagramPhotosAdapter(Context context, List<InstagramPhoto> objects, FragmentManager supportFragmentManager) {
         super(context, android.R.layout.simple_list_item_1, objects);
+        fm = supportFragmentManager;
     }
 
+    private void showEditDialog(ArrayList<String> comments) {
+        EditNameDialog editNameDialog = EditNameDialog.newInstance("Comments",comments);
+        editNameDialog.show(fm, "comments");
+    }
     // what our item looks like
     // use the template to display each photo
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // get the data item for this position
-        InstagramPhoto photo = getItem(position);
+        final InstagramPhoto photo = getItem(position);
         // check if we are using a recycled view, if not we need to inflate
         if(convertView == null){
             //create a new view from template
@@ -51,6 +59,12 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         tvLikes.setText(photo.likesCount + " likes");
 
         tvCommentCount.setText("view all " + photo.commentCount + " comments");
+        tvCommentCount.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditDialog(photo.comments);
+            }
+        });
         tvComment1.setText(Html.fromHtml(photo.comment1));
         tvComment2.setText(Html.fromHtml(photo.comment2));
 
